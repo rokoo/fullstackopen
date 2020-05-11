@@ -6,14 +6,14 @@ const Header = (props) => {
 };
 
 const Content = (props) => {
-  const part1 = props.part1;
-  const part2 = props.part2;
-  const part3 = props.part3;
+  const part1 = props.parts[0];
+  const part2 = props.parts[1];
+  const part3 = props.parts[2];
   return (
     <div>
-      <Part part={part1.part} number={part1.number}></Part>
-      <Part part={part2.part} number={part2.number}></Part>
-      <Part part={part3.part} number={part3.number}></Part>
+      <Part name={part1.name} number={part1.number}></Part>
+      <Part name={part2.name} number={part2.number}></Part>
+      <Part name={part3.name} number={part3.number}></Part>
     </div>
   );
 };
@@ -21,37 +21,43 @@ const Content = (props) => {
 const Part = (props) => {
   return (
     <p>
-      {props.part} {props.number}
+      {props.name} {props.number}
     </p>
   );
 };
 const APP = () => {
-  const course = "Half Stack Application development";
-  const parts = {
-    part1: {
-      part: "Fundamental of React",
-      number: 10,
-    },
-    part2: {
-      part: "Using props to pass data",
-      number: 7,
-    },
-    part3: {
-      part: "State of a component",
-      number: 15,
-    },
+  const course = {
+    name: "Half Stack Application development",
+    parts: [
+      {
+        name: "Fundamental of React",
+        number: 10,
+      },
+      {
+        name: "Using props to pass data",
+        number: 7,
+      },
+      {
+        name: "State of a component",
+        number: 14,
+      },
+    ],
   };
   return (
     <div>
-      <Header course={course}></Header>
-      <Content part1={parts.part1} part2={parts.part2} part3={parts.part3} />
-      <Total part1={parts.part1} part2={parts.part2} part3={parts.part3} />
+      <Header course={course.name} />
+      <Content parts={course.parts} />
+      <Total parts={course.parts} />
     </div>
   );
 };
 
 const Total = (props) => {
-  return <p>{props.part1.number + props.part2.number + props.part3.number}</p>;
+  return (
+    <p>
+      {props.parts[0].number + props.parts[1].number + props.parts[2].number}
+    </p>
+  );
 };
 
 ReactDOM.render(<APP />, document.getElementById("root"));
